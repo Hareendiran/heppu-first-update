@@ -20,8 +20,8 @@ const Navbar: React.FC = () => {
     <>
       <nav
         className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${isScrolled
-            ? 'py-4 bg-heppu-cream/80 backdrop-blur-md shadow-sm'
-            : 'py-6 bg-transparent'
+          ? 'py-4 bg-heppu-cream/80 backdrop-blur-md shadow-sm'
+          : 'py-6 bg-transparent'
           }`}
       >
         <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
@@ -34,48 +34,23 @@ const Navbar: React.FC = () => {
             />
           </div>
 
-          {/* Desktop Links */}
-          <div className="hidden md:flex items-center gap-8 font-medium">
-            <a href="#" className="hover:text-[#570B03] transition-colors">Our Story</a>
-            <a href="#" className="hover:text-[#570B03] transition-colors">Products</a>
-            <a href="#" className="hover:text-[#570B03] transition-colors">Recipes</a>
-            <a href="#" className="hover:text-[#570B03] transition-colors">Sustainability</a>
+          {/* Links */}
+          <div className="flex items-center gap-4 md:gap-8 font-medium overflow-x-auto no-scrollbar whitespace-nowrap scroll-smooth px-2">
+            <a href="#" className="hover:text-[#570B03] transition-colors text-sm md:text-base">Our Story</a>
+            <a href="#" className="hover:text-[#570B03] transition-colors text-sm md:text-base">Products</a>
+            <a href="#" className="hover:text-[#570B03] transition-colors text-sm md:text-base">Recipes</a>
+            <a href="#" className="hover:text-[#570B03] transition-colors text-sm md:text-base hidden sm:block">Sustainability</a>
           </div>
 
           {/* Actions */}
-          <div className="hidden md:flex items-center gap-4">
-            <button className="flex items-center gap-2 px-4 py-2 rounded-full border border-heppu-dark/20 hover:bg-heppu-dark hover:text-heppu-cream transition-all">
-              <ShoppingBag size={18} />
-              <span>Cart (0)</span>
-            </button>
-          </div>
-
-          {/* Mobile Toggle */}
-          <div className="md:hidden z-50">
-            <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
-              {mobileMenuOpen ? <X /> : <Menu />}
+          <div className="flex items-center gap-2 md:gap-4 flex-shrink-0">
+            <button className="flex items-center gap-1 md:gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full border border-heppu-dark/20 hover:bg-heppu-dark hover:text-heppu-cream transition-all">
+              <ShoppingBag size={18} className="w-4 h-4 md:w-[18px] md:h-[18px]" />
+              <span className="text-sm md:text-base whitespace-nowrap">Cart (0)</span>
             </button>
           </div>
         </div>
       </nav>
-
-      {/* Mobile Menu Overlay */}
-      <AnimatePresence>
-        {mobileMenuOpen && (
-          <MotionDiv
-            initial={{ opacity: 0, y: '-100%' }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: '-100%' }}
-            transition={{ duration: 0.4, ease: "easeInOut" }}
-            className="fixed inset-0 bg-heppu-cream z-30 flex flex-col items-center justify-center gap-8 text-2xl font-display"
-          >
-            <a href="#" onClick={() => setMobileMenuOpen(false)}>Our Story</a>
-            <a href="#" onClick={() => setMobileMenuOpen(false)}>Products</a>
-            <a href="#" onClick={() => setMobileMenuOpen(false)}>Recipes</a>
-            <a href="#" onClick={() => setMobileMenuOpen(false)}>Cart</a>
-          </MotionDiv>
-        )}
-      </AnimatePresence>
     </>
   );
 };
