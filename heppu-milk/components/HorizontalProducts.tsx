@@ -56,7 +56,7 @@ const HorizontalProducts: React.FC = () => {
 
   return (
     <section ref={targetRef} className="relative h-[300vh] bg-black">
-      <div className="sticky top-0 flex flex-col justify-center h-screen overflow-hidden">
+      <div className="sticky top-0 flex flex-col pt-32 md:pt-40 h-screen overflow-hidden">
 
         {/* Section Header (Stays on screen while cards scroll) */}
         <div className="px-10 md:px-20 z-10 w-full mb-8 md:mb-12 pointer-events-none">
