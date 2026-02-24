@@ -56,10 +56,10 @@ const HorizontalProducts: React.FC = () => {
 
   return (
     <section ref={targetRef} className="relative h-[300vh] bg-black">
-      <div className="sticky top-0 flex flex-col pt-32 md:pt-40 h-screen overflow-hidden">
+      <div className="sticky top-0 flex items-center h-screen min-h-[700px] overflow-hidden">
 
-        {/* Section Header (Stays on screen while cards scroll) */}
-        <div className="px-10 md:px-20 z-10 w-full mb-8 md:mb-12 pointer-events-none">
+        {/* Section Header (Fixed position visually to dodge the cards) */}
+        <div className="absolute top-12 md:top-24 left-10 md:left-20 z-10 w-full pointer-events-none">
           <h2 className="text-4xl md:text-6xl font-display font-bold text-heppu-dark">
             The Collection
           </h2>
@@ -67,7 +67,7 @@ const HorizontalProducts: React.FC = () => {
         </div>
 
         {/* Moving Container */}
-        <motion.div style={{ x }} className="flex gap-12 px-10 md:px-20">
+        <motion.div style={{ x }} className="flex gap-12 px-10 md:px-20 pt-32 md:pt-40">
           {products.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
