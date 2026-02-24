@@ -16,7 +16,7 @@ const Hero: React.FC = () => {
   const MotionDiv = motion.div as any;
 
   return (
-    <div ref={containerRef} className="relative h-screen w-full overflow-hidden flex items-center justify-center pt-20">
+    <div ref={containerRef} className="relative min-h-[700px] h-[100svh] w-full overflow-hidden flex items-center justify-center pt-20 pb-10">
 
       {/* Background Decor Elements */}
       <div className="absolute top-1/4 left-10 w-64 h-64 bg-heppu-clay/10 rounded-full blur-3xl" />
@@ -70,7 +70,7 @@ const Hero: React.FC = () => {
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
-          className="absolute bottom-10 flex flex-col items-center gap-2"
+          className="absolute bottom-4 md:bottom-10 flex flex-col items-center gap-2"
         >
           <span className="text-sm font-medium uppercase tracking-widest text-heppu-dark/50">Scroll to pour</span>
           <div className="w-px h-16 bg-gradient-to-b from-heppu-dark/50 to-transparent"></div>

@@ -47,9 +47,12 @@ const HorizontalProducts: React.FC = () => {
     offset: ["start start", "end end"]
   });
 
-  // Calculate the horizontal translation based on scroll progress
-  // We want to move the list to the left as we scroll down
-  const x = useTransform(scrollYProgress, [0, 1], ["1%", "-65%"]);
+  // Use a safe translation interpolation to resolve the framer-motion crash on calc() strings.
+  // Instead of static percentages, we use a function returning a string so it dynamically calculates the right edge lock.
+  const x = useTransform(scrollYProgress, (v) => {
+    if (typeof window === "undefined") return "0%";
+    return `calc(${v * -100}% + ${v * 100}vw)`;
+  });
 
   return (
     <section ref={targetRef} className="relative h-[300vh] bg-black">

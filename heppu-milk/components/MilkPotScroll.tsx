@@ -13,8 +13,13 @@ const MilkPotScroll: React.FC = () => {
         setIsMounted(true);
     }, []);
 
-    // Scroll tracking on window
-    const { scrollYProgress } = useScroll();
+    const containerRef = useRef<HTMLDivElement>(null);
+
+    // Provide a fallback scroll value for hydration
+    const { scrollYProgress } = useScroll({
+        target: isMounted ? containerRef : undefined,
+        offset: ["start start", "end end"]
+    });
 
     // Smooth out the scroll progress
     const smoothProgress = useSpring(scrollYProgress, {
@@ -94,53 +99,51 @@ const MilkPotScroll: React.FC = () => {
 
     if (!isMounted) return null;
 
-    if (loaded < FRAME_COUNT) {
-        return (
-            <div className="h-screen w-full flex flex-col items-center justify-center bg-[#050505] text-[#f5f5f4]">
-                <div className="w-48 h-1 bg-neutral-800 rounded-full overflow-hidden">
-                    <div
-                        className="h-full bg-neutral-400 transition-all duration-300"
-                        style={{ width: `${(loaded / FRAME_COUNT) * 100}%` }}
-                    />
-                </div>
-                <p className="mt-4 font-sans text-sm tracking-widest uppercase">Loading Legacy</p>
-            </div>
-        );
-    }
-
     return (
-        <div className="relative w-full bg-[#050505]" style={{ height: "400vh" }}>
-            <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center bg-[#050505]">
-                <canvas ref={canvasRef} className="absolute inset-0 w-full h-full object-cover z-0" />
-
-                <div className="relative z-10 w-full max-w-7xl mx-auto px-6 h-full flex items-center justify-center pointer-events-none">
-
-                    <motion.div
-                        style={{ opacity: beatAOpacity, y: beatAY }}
-                        className="absolute text-center max-w-lg"
-                    >
-                        <h1 className="font-display text-5xl md:text-7xl font-bold text-[#f5f5f4] mb-4 tracking-tight">
-                            EARTH & ESSENCE
-                        </h1>
-                        <p className="font-sans text-neutral-400 text-lg md:text-xl mx-auto">
-                            Tradition crafted from the ground up, inside ancient clay vessels.
-                        </p>
-                    </motion.div>
-
-                    <motion.div
-                        style={{ opacity: beatBOpacity, y: beatBY }}
-                        className="absolute text-center max-w-lg"
-                    >
-                        <h2 className="font-display text-5xl md:text-7xl font-bold text-[#f5f5f4] mb-4 tracking-tight">
-                            TASTE THE ORIGINS
-                        </h2>
-                        <p className="font-sans text-neutral-400 text-lg md:text-xl mx-auto">
-                            Experience the difference real tradition makes.
-                        </p>
-                    </motion.div>
-
+        <div ref={containerRef} className="relative w-full bg-[#050505]" style={loaded < FRAME_COUNT ? { height: "100vh" } : { height: "400vh" }}>
+            {loaded < FRAME_COUNT ? (
+                <div className="h-screen w-full flex flex-col items-center justify-center bg-[#050505] text-[#f5f5f4]">
+                    <div className="w-48 h-1 bg-neutral-800 rounded-full overflow-hidden">
+                        <div
+                            className="h-full bg-neutral-400 transition-all duration-300"
+                            style={{ width: `${(loaded / FRAME_COUNT) * 100}%` }}
+                        />
+                    </div>
+                    <p className="mt-4 font-sans text-sm tracking-widest uppercase">Loading Legacy</p>
                 </div>
-            </div>
+            ) : (
+                <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center bg-[#050505]">
+                    <canvas ref={canvasRef} className="absolute inset-0 w-full h-full object-cover z-0" />
+
+                    <div className="relative z-10 w-full max-w-7xl mx-auto px-6 h-full flex items-center justify-center pointer-events-none">
+
+                        <motion.div
+                            style={{ opacity: beatAOpacity, y: beatAY }}
+                            className="absolute text-center max-w-lg"
+                        >
+                            <h1 className="font-display text-5xl md:text-7xl font-bold text-[#f5f5f4] mb-4 tracking-tight">
+                                EARTH & ESSENCE
+                            </h1>
+                            <p className="font-sans text-neutral-400 text-lg md:text-xl mx-auto">
+                                Tradition crafted from the ground up, inside ancient clay vessels.
+                            </p>
+                        </motion.div>
+
+                        <motion.div
+                            style={{ opacity: beatBOpacity, y: beatBY }}
+                            className="absolute text-center max-w-lg"
+                        >
+                            <h2 className="font-display text-5xl md:text-7xl font-bold text-[#f5f5f4] mb-4 tracking-tight">
+                                TASTE THE ORIGINS
+                            </h2>
+                            <p className="font-sans text-neutral-400 text-lg md:text-xl mx-auto">
+                                Experience the difference real tradition makes.
+                            </p>
+                        </motion.div>
+
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
