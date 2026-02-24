@@ -86,19 +86,11 @@ const MilkPotScroll: React.FC = () => {
         };
     }, [loaded, images, frameIndex, isMounted]);
 
-    const beatAOpacity = useTransform(smoothProgress, [0, 0.1, 0.15, 0.25], [1, 1, 0, 0]);
-    const beatAY = useTransform(smoothProgress, [0, 0.1, 0.15, 0.25], [0, 0, -20, -20]);
+    const beatAOpacity = useTransform(smoothProgress, [0.15, 0.25, 0.40, 0.50], [0, 1, 1, 0]);
+    const beatAY = useTransform(smoothProgress, [0.15, 0.25, 0.40, 0.50], [20, 0, 0, -20]);
 
-    const beatBOpacity = useTransform(smoothProgress, [0.25, 0.35, 0.35, 0.45], [0, 1, 1, 0]);
-    const beatBY = useTransform(smoothProgress, [0.25, 0.35, 0.35, 0.45], [20, 0, 0, -20]);
-
-    const beatCOpacity = useTransform(smoothProgress, [0.50, 0.60, 0.60, 0.70], [0, 1, 1, 0]);
-    const beatCY = useTransform(smoothProgress, [0.50, 0.60, 0.60, 0.70], [20, 0, 0, -20]);
-
-    const beatDOpacity = useTransform(smoothProgress, [0.75, 0.85, 1, 1], [0, 1, 1, 1]);
-    const beatDY = useTransform(smoothProgress, [0.75, 0.85, 1, 1], [20, 0, 0, 0]);
-
-    const scrollIndicatorOpacity = useTransform(smoothProgress, [0, 0.1], [1, 0]);
+    const beatBOpacity = useTransform(smoothProgress, [0.55, 0.65, 0.80, 0.90], [0, 1, 1, 0]);
+    const beatBY = useTransform(smoothProgress, [0.55, 0.65, 0.80, 0.90], [20, 0, 0, -20]);
 
     if (!isMounted) return null;
 
@@ -124,64 +116,25 @@ const MilkPotScroll: React.FC = () => {
                 <div className="relative z-10 w-full max-w-7xl mx-auto px-6 h-full flex items-center justify-center pointer-events-none">
 
                     <motion.div
-                        style={{ opacity: scrollIndicatorOpacity }}
-                        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
-                    >
-                        <span className="text-xs uppercase tracking-[0.2em] text-neutral-400">Scroll to pour</span>
-                        <div className="w-[1px] h-12 bg-neutral-800 overflow-hidden relative">
-                            <motion.div
-                                className="w-full h-1/2 bg-neutral-400 animate-pulse"
-                                initial={{ y: -24 }}
-                                animate={{ y: 48 }}
-                                transition={{ repeat: Infinity, duration: 1.5, ease: "linear" }}
-                            />
-                        </div>
-                    </motion.div>
-
-                    <motion.div
                         style={{ opacity: beatAOpacity, y: beatAY }}
-                        className="absolute text-center"
+                        className="absolute text-center max-w-lg"
                     >
                         <h1 className="font-display text-5xl md:text-7xl font-bold text-[#f5f5f4] mb-4 tracking-tight">
                             EARTH & ESSENCE
                         </h1>
-                        <p className="font-sans text-neutral-400 text-lg md:text-xl max-w-md mx-auto">
+                        <p className="font-sans text-neutral-400 text-lg md:text-xl mx-auto">
                             Tradition crafted from the ground up, inside ancient clay vessels.
                         </p>
                     </motion.div>
 
                     <motion.div
                         style={{ opacity: beatBOpacity, y: beatBY }}
-                        className="absolute left-6 md:left-24 text-left max-w-lg"
+                        className="absolute text-center max-w-lg"
                     >
-                        <h2 className="font-display text-4xl md:text-6xl font-bold text-[#f5f5f4] mb-4 tracking-tight">
-                            RAW PURITY
-                        </h2>
-                        <p className="font-sans text-neutral-400 text-lg md:text-xl">
-                            Unfiltered natural nourishment that feels alive with every pour.
-                        </p>
-                    </motion.div>
-
-                    <motion.div
-                        style={{ opacity: beatCOpacity, y: beatCY }}
-                        className="absolute right-6 md:right-24 text-right max-w-lg"
-                    >
-                        <h2 className="font-display text-4xl md:text-6xl font-bold text-[#f5f5f4] mb-4 tracking-tight">
-                            DYNAMIC FLOW
-                        </h2>
-                        <p className="font-sans text-neutral-400 text-lg md:text-xl">
-                            Captured in the moment of perfection, untouched by modern processing.
-                        </p>
-                    </motion.div>
-
-                    <motion.div
-                        style={{ opacity: beatDOpacity, y: beatDY }}
-                        className="absolute text-center"
-                    >
-                        <h2 className="font-display text-5xl md:text-7xl font-bold text-[#f5f5f4] mb-6 tracking-tight">
+                        <h2 className="font-display text-5xl md:text-7xl font-bold text-[#f5f5f4] mb-4 tracking-tight">
                             TASTE THE ORIGINS
                         </h2>
-                        <p className="font-sans text-neutral-400 text-lg md:text-xl mb-12 max-w-md mx-auto">
+                        <p className="font-sans text-neutral-400 text-lg md:text-xl mx-auto">
                             Experience the difference real tradition makes.
                         </p>
                     </motion.div>

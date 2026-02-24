@@ -44,7 +44,7 @@ const Navbar: React.FC = () => {
 
           {/* Actions */}
           <div className="flex items-center gap-2 md:gap-4 flex-shrink-0">
-            <button className="flex items-center gap-1 md:gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full border border-heppu-dark/20 hover:bg-heppu-dark hover:text-heppu-cream transition-all">
+            <button className="flex items-center gap-1 md:gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full border border-heppu-dark/20 bg-white text-black hover:bg-white/90 transition-all">
               <ShoppingBag size={18} className="w-4 h-4 md:w-[18px] md:h-[18px]" />
               <span className="text-sm md:text-base whitespace-nowrap">Cart (0)</span>
             </button>
