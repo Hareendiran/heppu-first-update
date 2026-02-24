@@ -15,9 +15,10 @@ const MilkPotScroll: React.FC = () => {
 
     const containerRef = useRef<HTMLDivElement>(null);
 
-    // Provide a fallback scroll value for hydration
+    // Provide a fallback scroll value for hydration. Since the outer div is permanently mounted,
+    // we can safely use the containerRef directly.
     const { scrollYProgress } = useScroll({
-        target: isMounted ? containerRef : undefined,
+        target: containerRef,
         offset: ["start start", "end end"]
     });
 
@@ -97,7 +98,8 @@ const MilkPotScroll: React.FC = () => {
     const beatBOpacity = useTransform(smoothProgress, [0.55, 0.65, 0.80, 0.90], [0, 1, 1, 0]);
     const beatBY = useTransform(smoothProgress, [0.55, 0.65, 0.80, 0.90], [20, 0, 0, -20]);
 
-    if (!isMounted) return null;
+    // We cannot return null early, because `containerRef` must be rendered in the DOM 
+    // for framer-motion's useScroll hook to hydrate properly.
 
     return (
         <div ref={containerRef} className="relative w-full bg-[#050505]" style={loaded < FRAME_COUNT ? { height: "100vh" } : { height: "400vh" }}>

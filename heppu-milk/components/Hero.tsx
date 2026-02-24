@@ -16,7 +16,7 @@ const Hero: React.FC = () => {
   const MotionDiv = motion.div as any;
 
   return (
-    <div ref={containerRef} className="relative min-h-[700px] h-[100svh] w-full overflow-hidden flex items-center justify-center pt-20 pb-10">
+    <div ref={containerRef} className="relative min-h-[850px] h-[100svh] w-full overflow-hidden flex items-center justify-center pt-32 pb-10">
 
       {/* Background Decor Elements */}
       <div className="absolute top-1/4 left-10 w-64 h-64 bg-heppu-clay/10 rounded-full blur-3xl" />
